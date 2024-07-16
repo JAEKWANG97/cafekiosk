@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import sample.cafekiosk.unit.beverage.Americano;
+import sample.cafekiosk.unit.order.Order;
 
 class CafeKioskTest {
 
@@ -56,7 +57,21 @@ class CafeKioskTest {
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
 
-        assertThatThrownBy(() -> cafeKiosk.add(americano, ㅌ ).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> cafeKiosk.add(americano, 0 )).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void createOrder(){
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+
+
+        cafeKiosk.add(americano);
+
+        Order order = cafeKiosk.createOrder();
+        assertThat(order.getBeverages()).hasSize(1);
+        assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
+
     }
 
 
